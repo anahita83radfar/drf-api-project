@@ -9,6 +9,7 @@ from drf_api_project.permissions import IsOwnerOrReadOnly
 
 # The code taken from the Code Institute drf-api project
 class ProfileList(APIView):
+    
     def get(self, request):
         profiles = Profile.objects.all()
         serializer = ProfileSerializer(profiles, many=True, context={'request' : request})
@@ -39,3 +40,8 @@ class ProfileDetail(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self, request, pk):
+        profile = self.get_object(pk)
+        profile.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
