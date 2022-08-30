@@ -5,6 +5,10 @@ from django.contrib.auth.models import User
 
 # The code taken from the Code Institute drf-api project
 class Profile(models.Model):
+    """
+    Profile model.
+    Default image set so that we can always reference image.url.
+    """
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

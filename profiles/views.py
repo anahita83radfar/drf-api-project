@@ -9,7 +9,9 @@ from drf_api_project.permissions import IsOwnerOrReadOnly
 
 # The code taken from the Code Institute drf-api project
 class ProfileList(APIView):
-    
+    """
+    List of all profiles.
+    """
     def get(self, request):
         profiles = Profile.objects.all()
         serializer = ProfileSerializer(profiles, many=True, context={'request' : request})
@@ -17,6 +19,9 @@ class ProfileList(APIView):
     
 
 class ProfileDetail(APIView):
+    """
+    Retrieve, update and delete a profile if you're the owner.
+    """
     serializer_class = ProfileSerializer
     permission_classes = [IsOwnerOrReadOnly]
     
