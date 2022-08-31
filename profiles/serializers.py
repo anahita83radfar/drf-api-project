@@ -4,6 +4,10 @@ from .models import Profile
 
 # The code taken from the Code Institute drf-api project
 class ProfileSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Profile model.
+    'get_is_owner' method here check if the currently logged in user is the owner of the profile.
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     

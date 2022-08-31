@@ -4,6 +4,11 @@ from .models import Post
 
 # The code taken from the Code Institute drf-api project
 class PostSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Post model.
+    'get_is_owner' method here check if the currently logged in user is the owner of the post.
+    'validate_image' method will be validate the uploaded image every time we create or update a post.
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')

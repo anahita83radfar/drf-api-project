@@ -4,6 +4,10 @@ from .models import Comment
 
 # The code taken from the Code Institute drf-api project
 class CommentSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Comment model.
+    'get_is_owner' method here check if the currently logged in user is the owner of the comment.
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')

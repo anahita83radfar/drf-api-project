@@ -9,13 +9,13 @@ class LikeSerializer(serializers.ModelSerializer):
     Serializer for the Like model.
     We don't need a 'get_is_owner' method here because we don't 
     need to know if the currently logged in user is the owner of a like.
-    The create method handles duplicates, the unique constraint on 'owner' and 'post'
+    The 'create' method handles duplicates, the unique constraint on 'owner' and 'post'
     """
     owner = serializers.ReadOnlyField(source='owner.username')
     
     
     class Meta:
-        model = Comment
+        model = Like
         fields = [
             'id', 'owner', 'post', 'created_at'
         ]

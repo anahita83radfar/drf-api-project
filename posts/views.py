@@ -8,6 +8,8 @@ from drf_api_project.permissions import IsOwnerOrReadOnly
 class PostList(generics.ListCreateAPIView):
     """
     List of all posts and create a post if logged in.
+    By defining the 'perform_create' method make sure posts
+    are associated with a user upon creation.
     """
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
