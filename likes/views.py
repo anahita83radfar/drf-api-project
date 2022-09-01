@@ -19,6 +19,9 @@ class LikeList(generics.ListCreateAPIView):
         serializer.save(owner=self.request.user)
 
 class LikeDetail(generics.RetrieveDestroyAPIView):
+    """
+    Retrieve and delete a like if you own it.
+    """
     serializer_class = LikeSerializer
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Like.objects.all()
