@@ -21,7 +21,11 @@ class ProfileList(generics.ListAPIView):
         following_count=Count('owner__following', distinct=True)
     ).order_by('-created_at')
     filter_backends = [
-        filters.OrderingFilter
+        filters.OrderingFilter,
+        filters.SearchFilter,
+    ]
+    search_fields = [
+        'owner__username',
     ]
     ordering_fields = [
         'posts_count',
