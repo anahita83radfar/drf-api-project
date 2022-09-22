@@ -7,11 +7,13 @@ from followers.models import Follower
 class ProfileSerializer(serializers.ModelSerializer):
     """
     Serializer for the Profile model.
-    'get_is_owner' method here check if the currently logged in user is the owner of the profile.
-    By adding 'get_following_id' method If I am logged in and follow a profile, I can see the id 
-    of the newly created Follower instance in profile’s following_id field on the Profile list. 
-    This means that I am following that person’s profile and if I decide to unfollow  them, 
-    I know which Follower instance to delete.
+    'get_is_owner' method here check if the currently
+    logged in user is the owner of the profile. By adding
+    'get_following_id' method If I am logged in and follow a profile,
+    I can see the id of the newly created Follower instance in profile’s
+    following_id field on the Profile list. This means that I am following
+    that person’s profile and if I decide to unfollow  them, I know which
+    Follower instance to delete.
     """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
@@ -19,11 +21,11 @@ class ProfileSerializer(serializers.ModelSerializer):
     posts_count = serializers.ReadOnlyField()
     followers_count = serializers.ReadOnlyField()
     following_count = serializers.ReadOnlyField()
-    
+
     def get_is_owner(self, obj):
         request = self.context['request']
         return request.user == obj.owner
-    
+
     def get_following_id(self, obj):
         user = self.context['request'].user
         if user.is_authenticated:
@@ -32,8 +34,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             ).first()
             return following.id if following else None
         return None
-    
-    
+
     class Meta:
         model = Profile
         fields = [
@@ -41,4 +42,3 @@ class ProfileSerializer(serializers.ModelSerializer):
             'email', 'content', 'image', 'is_owner', 'following_id',
             'posts_count', 'followers_count', 'following_count'
         ]
-        

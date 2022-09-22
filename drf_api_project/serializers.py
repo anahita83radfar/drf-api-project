@@ -6,7 +6,7 @@ from rest_framework import serializers
 class CurrentUserSerializer(UserDetailsSerializer):
     """
     By adding the 'profile_id' and 'profile_image' to fields,
-    we’ll know which profile to link to and what image to 
+    we’ll know which profile to link to and what image to
     show in the navigation bar for a logged in user.
     """
     profile_id = serializers.ReadOnlyField(source='profile.id')

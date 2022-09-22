@@ -1,108 +1,110 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# DRF API project
 
-Welcome anahita83radfar,
+DRF API project is the backend API for the front-end React app [Friends](https://friends-4hk0.onrender.com), using Django REST Framework to return HTML documents, only JSON data. This lets users LIST, SEARCH, CREATE, RETRIEVE, UPDATE and DELETE the resource inter alia the profiles, posts, comments, likes, and followers. For instance, the user will be able to CREATE a new comment, RETRIEVE, UPDATE or DELETE a previously created one, or LIST and SEARCH all of the comments.
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+ # Features
+ 
+- ### The Home page
+ ![The Home page](/media/images/readme/home.jpg)
+ 
+ The Home page url path : https://drf-api-project.onrender.com
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+- ### The Profiles page
+ ![The Profiles page](/media/images/readme/profiles.jpg)
 
-## Gitpod Reminders
+ The Profiles page url path : https://drf-api-project.onrender.com/profiles
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+ On this page, the user can see the list and number of profiles created by data that comes from the front-end React app [Friends](https://friends-4hk0.onrender.com). Each profile includes the id of the profile, owner of the profile which is an instance of user username, profile created and updated date, profile owner name, email, image, and profile content, number of posts created by the profile owner, the number of followers and following, id of profile that profile owner follows and check if the currently logged in user is the owner of the profile.
 
-`python3 -m http.server`
+ - ### The Posts page
+ ![The Posts page](/media/images/readme/posts.jpg)
 
-A blue button should appear to click: _Make Public_,
+ The Posts page url path : https://drf-api-project.onrender.com/posts
 
-Another blue button should appear to click: _Open Browser_.
+ On this page, the user can see the list and number of posts created by the users of the front-end React app [Friends](https://friends-4hk0.onrender.com). Each post includes the id of the post, owner of the post which is an instance of user username, the post created and updated date, post title, excerpt, content and image, the profile id and image of post owner, post image filter, number of likes and comments, id of liked post by post owner and check if the currently logged in user is the owner of the post.
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+  - ### The Comments page
+ ![The Comments page](/media/images/readme/comments.jpg)
 
-A blue button should appear to click: _Make Public_,
+ The Comments page url path : https://drf-api-project.onrender.com/comments
 
-Another blue button should appear to click: _Open Browser_.
+ On this page, the user can see the list and number of comments on the posts created by the users of the front-end React app [Friends](https://friends-4hk0.onrender.com). Each comment includes the id of the comment, the owner of the comment which is an instance of the user username, the id of the post that the user leaves a comment, the comment created and updated date, the content of the comment, the profile id and image of the owner of the comment, check if the comment is active and the currently logged in user is the owner of the comment.
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+  - ### The Likes page
+ ![The Likes page](/media/images/readme/likes.jpg)
 
-To log into the Heroku toolbelt CLI:
+  The Likes page url path : https://drf-api-project.onrender.com/likes
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+  On this page, the user can see the list and number of likes on the posts created by the users of the front-end React app [Friends](https://friends-4hk0.onrender.com). Each like includes the id of the like, the owner of the like which is an instance of the user username, the id of the post that the user liked, and the like created date.
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+  - ### The Followers page
+ ![The Followers page](/media/images/readme/followers.jpg)
 
-------
+ The Followers page url path : https://drf-api-project.onrender.com/followers
+ 
+On this page, the user can see the list and number of users followers. It includes the id, the owner that follows, the profile id and name of the follower, and the following created date.
 
-## Release History
+# Database Model
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+![Diagram](/media/images/readme/database.jpg)
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+# Dependencies
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+The libraries below have been used for this project:
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+- django-cloudinary-storage
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+   To connect the project to Cloudinary for the upload and storage of images
+- Pillow
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+   To add image processing capabilities
+- django-filter
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+   To apply filters based on a specific condition
+- dj-rest-auth
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+   To handle authentication and add JSON Web Tokens to the project
+- dj-rest-auth[with_social]
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+   To enable a standard registration process
+- djangorestframework-simplejwt
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+   To use JWT authentication
+- dj-database-url psycopg2
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+   To use Heroku Postgres database
+- Gunicorn
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+   To run the project on a suitable server for production
+- django-cors-headers
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+   To deal with CORS, which stands for cross-origin-resource-sharing
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+# Testing
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+   - ### Manual test case template
+   The document below demonstrates the individual test cases and shows that the expected results are gotten.
 
-------
+  ![Manual test case template](/media/images/readme/Manual-Test-Case-Template.jpg)
 
-## FAQ about the uptime script
+### Validator Testing
 
-**Why have you added this script?**
+- PEP8
+   - No errors were returned from PEP8online.com
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+# Deployment
+[DRF API project](https://drf-api-project.onrender.com) was deployed to Heroku.
+- Steps for deployment:
+  - Create a Virtual Environment
+  - Install Project Dependencies
+  - Update Local Database Schema
+  - Run a Local Development Server
+  - Fork or clone this repository
+  - Create a new Heroku app
+  - Update Remote Database Schema
+  - Link the Heroku app to the repository
+  - Click on **Deploy**
 
-**How will this affect me?**
-
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
-
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
-
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
-
-**So….?**
-
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
-
-**Can I opt out?**
-
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
-
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
-
-**Anything more?**
-
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
-
----
-
-Happy coding!
+# Credits
+### Content
+- The commented code in the project is taken from CI [drf-api](https://github.com/Code-Institute-Solutions/drf-api/tree/2c0931a2b569704f96c646555b0bee2a4d883f01) project.

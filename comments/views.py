@@ -20,10 +20,10 @@ class CommentList(generics.ListCreateAPIView):
         # Retrieve all the comments associated with a given post
         'post'
     ]
-    
+
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
-    
+
 
 class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     """
@@ -32,4 +32,3 @@ class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CommentDetailSerializer
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Comment.objects.all()
-    

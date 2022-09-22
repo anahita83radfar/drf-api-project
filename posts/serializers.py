@@ -7,10 +7,13 @@ from likes.models import Like
 class PostSerializer(serializers.ModelSerializer):
     """
     Serializer for the Post model.
-    'get_is_owner' method here check if the currently logged in user is the owner of the post.
-    'validate_image' method will be validate the uploaded image every time we create or update a post.
-    By adding 'get_like_id' method we’ll know if the current user has already liked a post.
-    If they have, we’ll need a like_id field so that we know which one to delete if they wish to unlike it.
+    'get_is_owner' method here check if the currently
+    logged in user is the owner of the post. 'validate_image'
+    method will be validate the uploaded image every time we
+    create or update a post. By adding 'get_like_id' method
+    we’ll know if the current user has already liked a post.
+    If they have, we’ll need a like_id field so that we know
+    which one to delete if they wish to unlike it.
     """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
@@ -19,9 +22,9 @@ class PostSerializer(serializers.ModelSerializer):
     like_id = serializers.SerializerMethodField()
     comments_count = serializers.ReadOnlyField()
     likes_count = serializers.ReadOnlyField()
-    
+
     def validate_image(self, value):
-        if value.size > 1024 * 1024 * 2 :
+        if value.size > 1024 * 1024 * 2:
             raise serializers.ValidationError('Image size larger than 2MB!')
         if value.image.height > 4096:
             raise serializers.ValidationError(
@@ -32,11 +35,11 @@ class PostSerializer(serializers.ModelSerializer):
                 'Image width larger than 4096px!'
             )
         return value
-    
+
     def get_is_owner(self, obj):
         request = self.context['request']
         return request.user == obj.owner
-    
+
     def get_like_id(self, obj):
         user = self.context['request'].user
         if user.is_authenticated:
@@ -45,14 +48,12 @@ class PostSerializer(serializers.ModelSerializer):
             ).first()
             return like.id if like else None
         return None
-    
-    
+
     class Meta:
         model = Post
         fields = [
             'id', 'owner', 'created_at', 'updated_at', 'title',
             'excerpt', 'content', 'image', 'is_owner', 'profile_id',
-            'profile_image', 'image_filter', 'like_id','comments_count',
+            'profile_image', 'image_filter', 'like_id', 'comments_count',
             'likes_count'
         ]
-        

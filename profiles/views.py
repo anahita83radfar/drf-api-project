@@ -10,10 +10,12 @@ from drf_api_project.permissions import IsOwnerOrReadOnly
 class ProfileList(generics.ListAPIView):
     """
     List of all profiles.
-    By using the 'annotate' method on Profile can you add some specific fields to the 
-    queryset such as 'Count' method to calculate how many model instances of each there are.
-    By linking these fields to their relevant model fields, and limited instances being returned
-    using distinct = True. To make these fields sortable, needs to create filters. 
+    By using the 'annotate' method on Profile can you add some
+    specific fields to the queryset such as 'Count' method to
+    calculate how many model instances of each there are.
+    By linking these fields to their relevant model fields, and
+    limited instances being returned using distinct = True.
+    To make these fields sortable, needs to create filters.
     """
     serializer_class = ProfileSerializer
     queryset = Profile.objects.annotate(
@@ -55,4 +57,3 @@ class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
         followers_count=Count('owner__followed', distinct=True),
         following_count=Count('owner__following', distinct=True)
     ).order_by('-created_at')
-    
